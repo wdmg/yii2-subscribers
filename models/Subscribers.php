@@ -85,14 +85,14 @@ class Subscribers extends ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => Yii::t('app/modules/newsletters', 'ID'),
-            'email' => Yii::t('app/modules/newsletters', 'E-mail'),
-            'list_id' => Yii::t('app/modules/newsletters', 'List ID'),
-            'user_id' => Yii::t('app/modules/newsletters', 'User ID'),
-            'unique_token' => Yii::t('app/modules/newsletters', 'Unique token'),
-            'status' => Yii::t('app/modules/newsletters', 'Status'),
-            'created_at' => Yii::t('app/modules/newsletters', 'Created at'),
-            'updated_at' => Yii::t('app/modules/newsletters', 'Updated_at'),
+            'id' => Yii::t('app/modules/subscribers', 'ID'),
+            'email' => Yii::t('app/modules/subscribers', 'E-mail'),
+            'list_id' => Yii::t('app/modules/subscribers', 'List ID'),
+            'user_id' => Yii::t('app/modules/subscribers', 'User ID'),
+            'unique_token' => Yii::t('app/modules/subscribers', 'Unique token'),
+            'status' => Yii::t('app/modules/subscribers', 'Status'),
+            'created_at' => Yii::t('app/modules/subscribers', 'Created at'),
+            'updated_at' => Yii::t('app/modules/subscribers', 'Updated at'),
         ];
     }
 

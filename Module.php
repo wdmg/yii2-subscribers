@@ -6,7 +6,7 @@ namespace wdmg\subscribers;
  * Yii2 Subscribers
  *
  * @category        Module
- * @version         0.0.1
+ * @version         0.0.2
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-subscribers
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -30,7 +30,7 @@ class Module extends BaseModule
     /**
      * {@inheritdoc}
      */
-    public $defaultRoute = "list/all";
+    public $defaultRoute = "all/index";
 
     /**
      * @var string, the name of module
@@ -45,7 +45,7 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "0.0.1";
+    private $version = "0.0.2";
 
     /**
      * @var integer, priority of initialization
@@ -74,9 +74,21 @@ class Module extends BaseModule
     {
         $items = [
             'label' => $this->name,
-            'url' => [$this->routePrefix . '/'. $this->id],
+            'url' => '#',
             'icon' => 'fa-address-card',
-            'active' => in_array(\Yii::$app->controller->module->id, [$this->id])
+            'active' => in_array(\Yii::$app->controller->module->id, [$this->id]),
+            'items' => [
+                [
+                    'label' => Yii::t('app/modules/subscribers', 'All subscribers'),
+                    'url' => [$this->routePrefix . '/subscribers/all/'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['subscribers']) &&  Yii::$app->controller->id == 'all'),
+                ],
+                [
+                    'label' => Yii::t('app/modules/subscribers', 'Subscribers list'),
+                    'url' => [$this->routePrefix . '/subscribers/list/'],
+                    'active' => (in_array(\Yii::$app->controller->module->id, ['subscribers']) &&  Yii::$app->controller->id == 'list'),
+                ],
+            ]
         ];
         return $items;
     }
