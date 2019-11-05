@@ -4,12 +4,12 @@ namespace wdmg\subscribers\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use wdmg\subscribers\models\Subscribers;
+use wdmg\subscribers\models\SubscribersList;
 
 /**
- * SubscribersSearch represents the model behind the search form of `wdmg\subscribers\models\Subscribers`.
+ * SubscribersListSearch represents the model behind the search form of `wdmg\subscribers\models\SubscribersList`.
  */
-class SubscribersSearch extends Subscribers
+class SubscribersListSearch extends SubscribersList
 {
     /**
      * {@inheritdoc}
@@ -18,8 +18,8 @@ class SubscribersSearch extends Subscribers
     {
         return [
             [['id'], 'integer'],
-            [['list_id', 'user_id'], 'integer'],
-            [['email', 'status', 'created_at', 'updated_at'], 'safe'],
+            [['title', 'description'], 'string'],
+            [['status', 'created_at', 'created_by', 'updated_at', 'updated_by'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class SubscribersSearch extends Subscribers
      */
     public function search($params)
     {
-        $query = Subscribers::find();
+        $query = SubscribersList::find();
 
         // add conditions that should always apply here
 
@@ -62,11 +62,12 @@ class SubscribersSearch extends Subscribers
             'id' => $this->id,
         ]);
 
-        $query->andFilterWhere(['like', 'email', $this->email])
-            ->andFilterWhere(['like', 'list_id', $this->list_id])
-            ->andFilterWhere(['like', 'user_id', $this->user_id])
+        $query->andFilterWhere(['like', 'title', $this->title])
+            ->andFilterWhere(['like', 'description', $this->description])
             ->andFilterWhere(['like', 'created_at', $this->created_at])
-            ->andFilterWhere(['like', 'updated_at', $this->updated_at]);
+            ->andFilterWhere(['like', 'created_by', $this->created_by])
+            ->andFilterWhere(['like', 'created_at', $this->created_at])
+            ->andFilterWhere(['like', 'updated_by', $this->updated_by]);
 
         if($this->status !== "*")
             $query->andFilterWhere(['like', 'status', $this->status]);

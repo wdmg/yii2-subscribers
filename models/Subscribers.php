@@ -7,6 +7,8 @@ use yii\db\Expression;
 use yii\db\ActiveRecord;
 use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
+use wdmg\subscribers\models\SubscribersList;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "{{%subscribers}}".
@@ -101,7 +103,7 @@ class Subscribers extends ActiveRecord
      */
     public function getStatusesList($allStatuses = false)
     {
-        if($allStatuses)
+        if ($allStatuses)
             $list[] = [
                 '*' => Yii::t('app/modules/subscribers', 'All statuses')
             ];
@@ -112,6 +114,32 @@ class Subscribers extends ActiveRecord
         ];
 
         return $list;
+    }
+
+    /**
+     * @return array of list
+     */
+    public function getSubscribersList($allList = false)
+    {
+        $list = [];
+        if ($allList)
+            $list = [
+                '*' => Yii::t('app/modules/subscribers', 'All lists')
+            ];
+
+        $result = SubscribersList::find()->select('id, title')->asArray()->all();
+        return ArrayHelper::merge($list, ArrayHelper::map($result, 'id', 'title'));
+    }
+
+    /**
+     * @return object of \yii\db\ActiveQuery
+     */
+    public function getList()
+    {
+        if($list = $this->hasOne(SubscribersList::className(), ['id' => 'list_id']))
+            return $list;
+        else
+            return null;
     }
 
     /**

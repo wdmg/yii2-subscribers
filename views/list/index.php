@@ -58,7 +58,6 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
             'created_at:datetime',
             'updated_at:datetime',
-
             [
                 'class' => 'yii\grid\ActionColumn',
                 'header' => Yii::t('app/modules/subscribers', 'Actions'),
@@ -97,7 +96,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <div>
-        <?= Html::a(Yii::t('app/modules/subscribers', 'Add new list'), ['list/create'], ['class' => 'btn btn-success pull-right']) ?>
+        <?= Html::a(Yii::t('app/modules/subscribers', 'Add list'), ['list/create'], ['class' => 'btn btn-success pull-right']) ?>
     </div>
     <?php Pjax::end(); ?>
 </div>

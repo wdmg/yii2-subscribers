@@ -29,9 +29,36 @@ $this->params['breadcrumbs'][] = $this->title;
             ['class' => 'yii\grid\SerialColumn'],
 
             'email',
-            'list_id',
-            'user_id',
-            'unique_token',
+            [
+                'attribute' => 'list_id',
+                'label' => Yii::t('app/modules/subscribers','Subscriber list'),
+                'filter' => SelectInput::widget([
+                    'model' => $searchModel,
+                    'attribute' => 'list_id',
+                    'items' => $searchModel->getSubscribersList(true),
+                    'options' => [
+                        'class' => 'form-control'
+                    ]
+                ]),
+                'format' => 'html',
+                'value' => function($data) {
+                    if ($list = $data->list)
+                        return $list->title;
+                    else
+                        return $data->list_id;
+                }
+            ],
+            [
+                'attribute' => 'user_id',
+                'label' => Yii::t('app/modules/subscribers','User'),
+                'format' => 'html',
+                'value' => function($data) {
+                    if ($user = $data->user)
+                        return $user->username;
+                    else
+                        return $data->user_id;
+                }
+            ],
             [
                 'attribute' => 'status',
                 'format' => 'html',
@@ -99,7 +126,7 @@ $this->params['breadcrumbs'][] = $this->title;
     ]); ?>
 
     <div>
-        <?= Html::a(Yii::t('app/modules/subscribers', 'Add new subscriber'), ['all/create'], ['class' => 'btn btn-success pull-right']) ?>
+        <?= Html::a(Yii::t('app/modules/subscribers', 'Add subscriber'), ['all/create'], ['class' => 'btn btn-success pull-right']) ?>
     </div>
     <?php Pjax::end(); ?>
 </div>
