@@ -30,6 +30,23 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'title',
             'description',
+
+            [
+                'attribute' => 'count',
+                'format' => 'html',
+                'headerOptions' => [
+                    'class' => 'text-center'
+                ],
+                'contentOptions' => [
+                    'class' => 'text-center'
+                ],
+                'value' => function($data) {
+                    if ($data->count > 0)
+                        return Html::a($data->count, ['all/index', 'SubscribersSearch[list_id]' => $data->id]);
+                    else
+                        return 0;
+                }
+            ],
             [
                 'attribute' => 'status',
                 'format' => 'html',

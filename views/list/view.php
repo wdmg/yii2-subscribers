@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="page-header">
     <h1><?= Html::encode($this->title) ?> <small class="text-muted pull-right">[v.<?= $this->context->module->version ?>]</small></h1>
 </div>
-<div class="subscribers-view">
+<div class="subscribers-list-view">
 
     <?= DetailView::widget([
         'model' => $model,

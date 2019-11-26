@@ -20,9 +20,41 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'email',
-            'list_id',
-            'user_id',
+            [
+                'attribute' => 'email',
+                'label' => Yii::t('app/modules/subscribers','Subscriber'),
+                'format' => 'text',
+                'value' => function($data) {
+                    if ($data->name && $data->email)
+                        return $data->name . ' <' . $data->email . '>';
+                    else if ($data->email)
+                        return '<' . $data->email . '>';
+                    else
+                        return null;
+                }
+            ],
+            [
+                'attribute' => 'list_id',
+                'label' => Yii::t('app/modules/subscribers','Subscriber list'),
+                'format' => 'text',
+                'value' => function($data) {
+                    if ($list = $data->list)
+                        return $list->title;
+                    else
+                        return $data->list_id;
+                }
+            ],
+            [
+                'attribute' => 'user_id',
+                'label' => Yii::t('app/modules/subscribers','User'),
+                'format' => 'html',
+                'value' => function($data) {
+                    if ($user = $data->user)
+                        return $user->username;
+                    else
+                        return $data->user_id;
+                }
+            ],
 
             [
                 'attribute' => 'unique_token',

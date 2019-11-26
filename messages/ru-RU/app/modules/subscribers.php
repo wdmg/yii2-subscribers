@@ -8,6 +8,7 @@ return [
     'ID' => 'ИД',
     'Title' => 'Заголовок',
     'Description' => 'Описание',
+    'Name' => 'Имя',
     'E-mail' => 'Эл. адрес',
     'List ID' => 'ИД списка',
     'User ID' => 'ИД пользователя',
@@ -24,6 +25,7 @@ return [
     'Subscriber list' => 'Список подписчиков',
     'Subscribers list' => 'Списки подписчиков',
     'Add subscriber' => 'Добавить подписчика',
+    'Subscriber' => 'Подписчик',
     'Add list' => 'Добавить список',
 
     'User' => 'Пользователь',

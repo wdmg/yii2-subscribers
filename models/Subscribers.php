@@ -14,6 +14,7 @@ use yii\helpers\ArrayHelper;
  * This is the model class for table "{{%subscribers}}".
  *
  * @property int $id
+ * @property string $name
  * @property string $email
  * @property integer $list_id
  * @property integer $user_id
@@ -51,13 +52,6 @@ class Subscribers extends ActiveRecord
             ]
         ];
 
-        if (class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users'])) {
-            $behaviors['blameable'] = [
-                'class' => BlameableBehavior::className(),
-                'createdByAttribute' => 'user_id'
-            ];
-        }
-
         return $behaviors;
     }
 
@@ -68,17 +62,35 @@ class Subscribers extends ActiveRecord
     {
         $rules = [
             [['email'], 'required'],
+            [['name'], 'string', 'max' => 32],
             [['email'], 'string', 'max' => 255],
             [['list_id', 'user_id'], 'integer'],
             [['status'], 'boolean'],
             [['unique_token', 'created_at', 'updated_at'], 'safe'],
         ];
 
-        if (class_exists('\wdmg\users\models\Users') && isset(Yii::$app->modules['users'])) {
+        if (class_exists('\wdmg\users\models\Users') && Yii::$app->has('users')) {
             $rules[] = [['user_id'], 'integer'];
         }
 
         return $rules;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function beforeSave($insert)
+    {
+        $this->unique_token = Yii::$app->security->generateRandomString(32);
+        if (parent::beforeSave($insert)) {
+            if ($insert) {
+                $this->unique_token = Yii::$app->security->generateRandomString(32);
+            }
+            return true;
+        }
+        return false;
+
     }
 
     /**
@@ -88,6 +100,7 @@ class Subscribers extends ActiveRecord
     {
         return [
             'id' => Yii::t('app/modules/subscribers', 'ID'),
+            'name' => Yii::t('app/modules/subscribers', 'Name'),
             'email' => Yii::t('app/modules/subscribers', 'E-mail'),
             'list_id' => Yii::t('app/modules/subscribers', 'List ID'),
             'user_id' => Yii::t('app/modules/subscribers', 'User ID'),

@@ -28,7 +28,19 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'email',
+            [
+                'attribute' => 'email',
+                'label' => Yii::t('app/modules/subscribers','Subscriber'),
+                'format' => 'text',
+                'value' => function($data) {
+                    if ($data->name && $data->email)
+                        return $data->name . ' <' . $data->email . '>';
+                    else if ($data->email)
+                        return '<' . $data->email . '>';
+                    else
+                        return null;
+                }
+            ],
             [
                 'attribute' => 'list_id',
                 'label' => Yii::t('app/modules/subscribers','Subscriber list'),

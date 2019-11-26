@@ -11,6 +11,8 @@ use wdmg\widgets\SelectInput;
 
 <div class="subscribers-form">
     <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'name')->textInput() ?>
     <?= $form->field($model, 'email')->textInput() ?>
 
     <?= $form->field($model, 'list_id')->widget(SelectInput::className(), [
@@ -24,9 +26,6 @@ use wdmg\widgets\SelectInput;
         ]
     ]); ?>
 
-
-    <?= $form->field($model, 'user_id')->textInput() ?>
-    <?= $form->field($model, 'unique_token')->textInput() ?>
     <?= $form->field($model, 'status')->widget(SelectInput::className(), [
         'items' => $model->getStatusesList(),
         'options' => [

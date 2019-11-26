@@ -20,6 +20,7 @@ class m191028_023318_subscribers extends Migration
         $this->createTable('{{%subscribers}}', [
             'id' => $this->primaryKey(),
 
+            'name' => $this->string(32),
             'email' => $this->string(255)->unique(),
 
             'list_id' => $this->integer()->null(),
@@ -36,6 +37,7 @@ class m191028_023318_subscribers extends Migration
             'idx_subscribers',
             '{{%subscribers}}',
             [
+                'name',
                 'email',
                 'list_id',
                 'user_id',
