@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use wdmg\widgets\SelectInput;
+use yii\bootstrap\Modal;
 
 /* @var $this yii\web\View */
 /* @var $searchModel wdmg\subscribers\models\SubscriberSearch */
@@ -136,11 +137,47 @@ $this->params['breadcrumbs'][] = $this->title;
             'nextPageLabel'  => Yii::t('app/modules/subscribers', 'Next page &rarr;')
         ],
     ]); ?>
-
+    <hr/>
     <div>
+        <div class="btn-group">
+            <?= Html::a(Yii::t('app/modules/subscribers', 'Delete all'), ['all/clear'], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => Yii::t('app/modules/subscribers', 'Are you sure you want to delete all subscribers? This action will not be undone.'),
+                    'method' => 'POST'
+                ]
+            ]) ?>
+            <?= Html::a(Yii::t('app/modules/subscribers', 'Import subscribers'), ['all/import'], [
+                'class' => 'btn btn-warning',
+                'data-toggle' => 'modal',
+                'data-target' => '#subscribersImport',
+                'data-pjax' => '1'
+            ]) ?>
+            <?= Html::a(Yii::t('app/modules/subscribers', 'Export subscribers'), ['all/export'], [
+                'class' => 'btn btn-info',
+                'data-toggle' => 'modal',
+                'data-target' => '#subscribersExport',
+                'data-pjax' => '1'
+            ]) ?>
+        </div>
         <?= Html::a(Yii::t('app/modules/subscribers', 'Add subscriber'), ['all/create'], ['class' => 'btn btn-success pull-right']) ?>
     </div>
     <?php Pjax::end(); ?>
 </div>
+
+
+<?php Modal::begin([
+    'id' => 'subscribersImport',
+    'header' => '<h4 class="modal-title">'.Yii::t('app/modules/subscribers', 'Subscribers import').'</h4>',
+]); ?>
+<?php echo $this->render('_import', ['model' => $importModel]); ?>
+<?php Modal::end(); ?>
+
+<?php Modal::begin([
+    'id' => 'subscribersExport',
+    'header' => '<h4 class="modal-title">'.Yii::t('app/modules/subscribers', 'Subscribers export').'</h4>',
+]); ?>
+<?php echo $this->render('_export', ['model' => $exportModel]); ?>
+<?php Modal::end(); ?>
 
 <?php echo $this->render('../_debug'); ?>

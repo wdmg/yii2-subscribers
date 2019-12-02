@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'contentOptions' => [
                     'class' => 'text-center'
                 ],
+                'label' => Yii::t('app/modules/subscribers', 'Count'),
                 'value' => function($data) {
                     if ($data->count > 0)
                         return Html::a($data->count, ['all/index', 'SubscribersSearch[list_id]' => $data->id]);
@@ -111,7 +112,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'nextPageLabel'  => Yii::t('app/modules/subscribers', 'Next page &rarr;')
         ],
     ]); ?>
-
+    <hr/>
     <div>
         <?= Html::a(Yii::t('app/modules/subscribers', 'Add list'), ['list/create'], ['class' => 'btn btn-success pull-right']) ?>
     </div>

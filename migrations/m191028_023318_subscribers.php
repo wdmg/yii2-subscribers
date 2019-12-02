@@ -21,7 +21,7 @@ class m191028_023318_subscribers extends Migration
             'id' => $this->primaryKey(),
 
             'name' => $this->string(32),
-            'email' => $this->string(255)->unique(),
+            'email' => $this->string(255),
 
             'list_id' => $this->integer()->null(),
             'user_id' => $this->integer()->null(),

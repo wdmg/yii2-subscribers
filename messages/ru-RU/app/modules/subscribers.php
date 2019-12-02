@@ -30,6 +30,7 @@ return [
 
     'User' => 'Пользователь',
     'Actions' => 'Действия',
+    'Count' => 'Количество',
 
     'All lists' => 'Все списки',
     'All statuses' => 'Все статусы',
@@ -49,6 +50,8 @@ return [
     'Edit' => 'Редактировать',
     'Delete' => 'Удалить',
     'Save' => 'Сохранить',
+
+    'Invalid field value.' => 'Неправильное значение поля.',
 
     'Add new list' => 'Добавить новый список',
     'Update list: {title}' => 'Редактировать список: {title}',
@@ -71,6 +74,26 @@ return [
     'Subscriber has been successfully deleted!' => 'Подписчик был успешно удалён!',
     'An error occurred while deleting the subscriber.' => 'Произошла ошибка при удалении подписчика.',
 
+
+    'Subscribers import' => 'Импорт подписчиков',
+    'Import subscribers' => 'Импорт подписчиков',
+    'Subscribers export' => 'Экспорт подписчиков',
+    'Export subscribers' => 'Экспорт подписчиков',
+    'Add to the list' => 'Добавить в список',
+    'File import' => 'Файл импорта',
+    'File import ({mimetype})' => 'Файл импорта ({mimetype})',
+    'Import' => 'Импорт',
+    'Export' => 'Экспорт',
+    'Close' => 'Закрыть',
+    'Not in listed' => 'Не в списке',
+
+    'Delete all' => 'Удалить всех',
+    'All subscribers have been successfully deleted!' => 'Все подписчики были успешно удалены!',
+    'An error occurred while deleting subscribers.' => 'Произошла ошибка при удалении подписчиков.',
+    'Are you sure you want to delete all subscribers? This action will not be undone.' => 'Вы действительно желаете удалить всех подписчиков? Это действие будет невозможно отменить.',
+
+    'Ok! {count, plural, one{# subscriber} few{# subscribers} many{# subscribers} other{# subscribers}} have been successfully imported.' => 'Ok! Было успешно импортировано {count, plural, one{# подписчик} few{# подписчика} many{# подписчиков} other{# подписчика}}.',
+    'An error occurred while importing subscribers.' => 'Произошла ошибка при импорте подписчиков.',
 
 ];
 

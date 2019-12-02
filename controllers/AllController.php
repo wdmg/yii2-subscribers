@@ -5,11 +5,14 @@ namespace wdmg\subscribers\controllers;
 use Yii;
 use wdmg\subscribers\models\Subscribers;
 use wdmg\subscribers\models\SubscribersSearch;
+use wdmg\subscribers\models\SubscribersImport;
+use wdmg\subscribers\models\SubscribersExport;
 use yii\db\ActiveRecord;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\filters\AccessControl;
+use yii\web\UploadedFile;
 
 /**
  * AllController implements the CRUD actions for Subscribers model.
@@ -32,6 +35,9 @@ class AllController extends Controller
                 'class' => VerbFilter::className(),
                 'actions' => [
                     'delete' => ['POST'],
+                    'clear' => ['POST'],
+                    'import' => ['POST'],
+                    'export' => ['POST'],
                 ],
             ],
             'access' => [
@@ -70,8 +76,13 @@ class AllController extends Controller
         $searchModel = new SubscribersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
+        $importModel = new SubscribersImport();
+        $exportModel = new SubscribersExport();
+
         return $this->render('index', [
             'searchModel' => $searchModel,
+            'importModel' => $importModel,
+            'exportModel' => $exportModel,
             'dataProvider' => $dataProvider,
         ]);
     }
@@ -148,6 +159,81 @@ class AllController extends Controller
             );
 
         return $this->redirect(['index']);
+    }
+
+    public function actionImport()
+    {
+        if (Yii::$app->request->isPost) {
+            $model = new SubscribersImport();
+            $import = UploadedFile::getInstance($model, 'import');
+            if (!is_null($import)) {
+                if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+                    $subscribers = [];
+                    if (($handle = fopen($import->tempName, 'r')) !== false) {
+                        while (($row = fgetcsv($handle, 1000, ';')) !== false) {
+                            $subscribers[] = $row;
+                        }
+                        fclose($handle);
+
+                        if ($count = $model->import($subscribers, $model->list_id))
+                            Yii::$app->getSession()->setFlash(
+                                'success',
+                                Yii::t('app/modules/subscribers', 'Ok! {count, plural, one{# subscriber} few{# subscribers} many{# subscribers} other{# subscribers}} have been successfully imported.', ['count' => $count])
+                            );
+                        else
+                            Yii::$app->getSession()->setFlash(
+                                'danger',
+                                Yii::t('app/modules/subscribers', 'An error occurred while importing subscribers.')
+                            );
+
+
+                    }
+                }
+            }
+        }
+
+        $this->redirect(['all/index']);
+    }
+
+    public function actionExport()
+    {
+        if (Yii::$app->request->isPost) {
+            $model = new SubscribersExport();
+            if ($model->load(Yii::$app->request->post()) && $model->validate()) {
+
+                $subscribers = $model->export($model->list_id);
+                if (!is_null($subscribers)) {
+                    $output = 'name;'.'email'."\r\n";
+                    foreach ($subscribers as $subscriber) {
+                        $output .= $subscriber['name'].';'.$subscriber['email']."\r\n";
+                    }
+                    $filename = 'subscribers_'.date('dmY_His').'.csv';
+                    Yii::$app->response->sendContentAsFile($output, $filename, [
+                        'mimeType' => 'text/csv',
+                        'inline' => false
+                    ])->send();
+                }
+            }
+        }
+        $this->redirect(['all/index']);
+    }
+
+    public function actionClear()
+    {
+        if (Yii::$app->request->isPost) {
+            $model = new Subscribers();
+            if ($model->deleteAll())
+                Yii::$app->getSession()->setFlash(
+                    'success',
+                    Yii::t('app/modules/subscribers', 'All subscribers have been successfully deleted!')
+                );
+            else
+                Yii::$app->getSession()->setFlash(
+                    'danger',
+                    Yii::t('app/modules/subscribers', 'An error occurred while deleting subscribers.')
+                );
+        }
+        $this->redirect(['all/index']);
     }
 
     /**

@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.0.1 (2019-12-02)
+ * Functionality for import/export of subscribers
+ 
 ## 1.0.0 (2019-11-05)
  * Added CRUD for models, translations
  
