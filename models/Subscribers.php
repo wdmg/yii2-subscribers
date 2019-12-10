@@ -43,7 +43,7 @@ class Subscribers extends ActiveRecord
     {
         $behaviors = [
             'timestamp' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
@@ -149,7 +149,7 @@ class Subscribers extends ActiveRecord
      */
     public function getList()
     {
-        if($list = $this->hasOne(SubscribersList::className(), ['id' => 'list_id']))
+        if($list = $this->hasOne(SubscribersList::class, ['id' => 'list_id']))
             return $list;
         else
             return null;
@@ -161,7 +161,7 @@ class Subscribers extends ActiveRecord
     public function getUser()
     {
         if(class_exists('\wdmg\users\models\Users'))
-            return $this->hasOne(\wdmg\users\models\Users::className(), ['id' => 'user_id']);
+            return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'user_id']);
         else
             return null;
     }
@@ -172,7 +172,7 @@ class Subscribers extends ActiveRecord
     public function getUsers()
     {
         if(class_exists('\wdmg\users\models\Users'))
-            return $this->hasMany(\wdmg\users\models\Users::className(), ['id' => 'user_id']);
+            return $this->hasMany(\wdmg\users\models\Users::class, ['id' => 'user_id']);
         else
             return null;
     }

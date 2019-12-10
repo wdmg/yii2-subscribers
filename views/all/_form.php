@@ -15,7 +15,7 @@ use wdmg\widgets\SelectInput;
     <?= $form->field($model, 'name')->textInput() ?>
     <?= $form->field($model, 'email')->textInput() ?>
 
-    <?= $form->field($model, 'list_id')->widget(SelectInput::className(), [
+    <?= $form->field($model, 'list_id')->widget(SelectInput::class, [
         'model' => $model,
         'attribute' => 'list_id',
         'items' => \yii\helpers\ArrayHelper::merge([
@@ -26,7 +26,7 @@ use wdmg\widgets\SelectInput;
         ]
     ]); ?>
 
-    <?= $form->field($model, 'status')->widget(SelectInput::className(), [
+    <?= $form->field($model, 'status')->widget(SelectInput::class, [
         'items' => $model->getStatusesList(),
         'options' => [
             'class' => 'form-control'

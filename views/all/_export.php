@@ -20,7 +20,7 @@ use wdmg\widgets\SelectInput;
             'enctype' => 'multipart/form-data'
         ]
     ]); ?>
-    <?= $form->field($model, 'list_id')->widget(SelectInput::className(), [
+    <?= $form->field($model, 'list_id')->widget(SelectInput::class, [
         'model' => $model,
         'attribute' => 'list_id',
         'items' => \yii\helpers\ArrayHelper::merge([

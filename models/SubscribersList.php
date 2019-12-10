@@ -40,7 +40,7 @@ class SubscribersList extends ActiveRecord
     {
         $behaviors = [
             'timestamp' => [
-                'class' => TimestampBehavior::className(),
+                'class' => TimestampBehavior::class,
                 'attributes' => [
                     ActiveRecord::EVENT_BEFORE_INSERT => 'created_at',
                     ActiveRecord::EVENT_BEFORE_UPDATE => 'updated_at',
@@ -48,7 +48,7 @@ class SubscribersList extends ActiveRecord
                 'value' => new Expression('NOW()'),
             ],
             'blameable' =>  [
-                'class' => BlameableBehavior::className(),
+                'class' => BlameableBehavior::class,
                 'createdByAttribute' => 'created_by',
                 'updatedByAttribute' => 'updated_by',
             ],
@@ -117,7 +117,7 @@ class SubscribersList extends ActiveRecord
      */
     public function getCount()
     {
-        return $this->hasOne(\wdmg\subscribers\models\Subscribers::className(), ['list_id' => 'id'])->count();
+        return $this->hasOne(\wdmg\subscribers\models\Subscribers::class, ['list_id' => 'id'])->count();
     }
 
     /**
@@ -126,7 +126,7 @@ class SubscribersList extends ActiveRecord
     public function getUser()
     {
         if(class_exists('\wdmg\users\models\Users'))
-            return $this->hasOne(\wdmg\users\models\Users::className(), ['id' => 'created_by']);
+            return $this->hasOne(\wdmg\users\models\Users::class, ['id' => 'created_by']);
         else
             return null;
     }
@@ -137,7 +137,7 @@ class SubscribersList extends ActiveRecord
     public function getUsers()
     {
         if(class_exists('\wdmg\users\models\Users'))
-            return $this->hasMany(\wdmg\users\models\Users::className(), ['id' => 'created_by']);
+            return $this->hasMany(\wdmg\users\models\Users::class, ['id' => 'created_by']);
         else
             return null;
     }

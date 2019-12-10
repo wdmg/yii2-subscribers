@@ -13,7 +13,7 @@ use wdmg\widgets\SelectInput;
     <?php $form = ActiveForm::begin(); ?>
     <?= $form->field($model, 'title')->textInput() ?>
     <?= $form->field($model, 'description')->textarea(['rows' => 4]) ?>
-    <?= $form->field($model, 'status')->widget(SelectInput::className(), [
+    <?= $form->field($model, 'status')->widget(SelectInput::class, [
         'items' => $model->getStatusesList(),
         'options' => [
             'class' => 'form-control'
