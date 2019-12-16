@@ -5,6 +5,8 @@ namespace wdmg\subscribers\controllers;
 use Yii;
 use wdmg\subscribers\models\SubscribersList;
 use wdmg\subscribers\models\SubscribersListSearch;
+use wdmg\subscribers\models\SubscribersImport;
+use wdmg\subscribers\models\SubscribersExport;
 use yii\db\ActiveRecord;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -69,9 +71,13 @@ class ListController extends Controller
     {
         $searchModel = new SubscribersListSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
+        $importModel = new SubscribersImport();
+        $exportModel = new SubscribersExport();
 
         return $this->render('index', [
             'searchModel' => $searchModel,
+            'importModel' => $importModel,
+            'exportModel' => $exportModel,
             'dataProvider' => $dataProvider,
         ]);
     }

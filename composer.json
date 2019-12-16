@@ -4,7 +4,7 @@
   "keywords": ["yii2", "yii2-subscribers", "subscribers manager", "wdmg"],
   "type": "yii2-extension",
   "license": "MIT",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "homepage": "https://github.com/wdmg/yii2-subscribers",
   "support": {
     "source": "https://github.com/wdmg/yii2-subscribers",
@@ -23,7 +23,8 @@
   "require": {
     "yiisoft/yii2": "^2.0.20",
     "wdmg/yii2-base": "^1.0.1",
-    "wdmg/yii2-selectinput": "^1.0.5"
+    "wdmg/yii2-selectinput": "^1.0.5",
+    "wdmg/yii2-helpers": "^1.2.2"
   },
   "minimum-stability": "dev",
   "autoload": {
@@ -33,7 +34,8 @@
   },
   "extra": {
     "options": {
-      "routePrefix": "admin"
+      "routePrefix": "admin",
+      "webRoute": "/subscribe"
     }
   }
 }

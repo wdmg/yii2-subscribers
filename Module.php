@@ -6,7 +6,7 @@ namespace wdmg\subscribers;
  * Yii2 Subscribers
  *
  * @category        Module
- * @version         1.0.2
+ * @version         1.0.3
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-subscribers
  * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
@@ -45,7 +45,12 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.0.2";
+    private $version = "1.0.3";
+
+    /**
+     * @var string, route to web for manage subscription
+     */
+    public $webRoute = "/subscribe";
 
     /**
      * @var integer, priority of initialization
@@ -64,6 +69,9 @@ class Module extends BaseModule
 
         // Set priority of current module
         $this->setPriority($this->priority);
+
+        // Normalize route for web
+        $this->webRoute = self::normalizeRoute($this->webRoute);
 
     }
 
@@ -99,5 +107,9 @@ class Module extends BaseModule
     public function bootstrap($app)
     {
         parent::bootstrap($app);
+
+        if (isset(Yii::$app->params["subscribers.webRoute"]))
+            $this->webRoute = Yii::$app->params["subscribers.webRoute"];
+
     }
 }

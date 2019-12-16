@@ -9,6 +9,7 @@ use yii\behaviors\TimestampBehavior;
 use yii\behaviors\BlameableBehavior;
 use wdmg\subscribers\models\SubscribersList;
 use yii\helpers\ArrayHelper;
+use yii\helpers\Url;
 
 /**
  * This is the model class for table "{{%subscribers}}".
@@ -27,6 +28,12 @@ class Subscribers extends ActiveRecord
 {
     const SUBSCRIBERS_STATUS_DISABLED = 0;
     const SUBSCRIBERS_STATUS_ACTIVE = 1;
+
+    public $username = null;
+    public $unsubscribe_link = null;
+    public $manage_link = null;
+
+    private $_module;
 
     /**
      * {@inheritdoc}
@@ -93,6 +100,30 @@ class Subscribers extends ActiveRecord
 
     }
 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function init()
+    {
+        parent::init();
+
+        if (!($this->_module = Yii::$app->getModule('admin/subscribers')))
+            $this->_module = Yii::$app->getModule('subscribers');
+
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function afterFind()
+    {
+        parent::afterFind();
+        $this->username = $this->getUsername();
+        $this->unsubscribe_link = $this->getUnsubscribeLink();
+        $this->manage_link = $this->getManageLink();
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -145,11 +176,41 @@ class Subscribers extends ActiveRecord
     }
 
     /**
+     * @return string
+     */
+    public function getUsername()
+    {
+        if ($this->user_id)
+            return $this->user->username.'111';
+        else
+            return null;
+    }
+
+    /**
+     * @return string
+     */
+    public function getUnsubscribeLink()
+    {
+        if ($this->list_id)
+            return Url::to([$this->_module->webRoute, 'action' => 'unsubscribe', 'subscriber' => $this->unique_token, 'list' => $this->list_id], true);
+        else
+            return Url::to([$this->_module->webRoute, 'action' => 'unsubscribe', 'subscriber' => $this->unique_token], true);
+    }
+
+    /**
+     * @return string
+     */
+    public function getManageLink()
+    {
+        return Url::to([$this->_module->webRoute, 'action' => 'manage', 'subscriber' => $this->unique_token], true);
+    }
+
+    /**
      * @return object of \yii\db\ActiveQuery
      */
     public function getList()
     {
-        if($list = $this->hasOne(SubscribersList::class, ['id' => 'list_id']))
+        if ($list = $this->hasOne(SubscribersList::class, ['id' => 'list_id']))
             return $list;
         else
             return null;

@@ -75,7 +75,6 @@ class AllController extends Controller
     {
         $searchModel = new SubscribersSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
         $importModel = new SubscribersImport();
         $exportModel = new SubscribersExport();
 
@@ -168,11 +167,9 @@ class AllController extends Controller
             $import = UploadedFile::getInstance($model, 'import');
             if (!is_null($import)) {
                 if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-                    $subscribers = [];
                     if (($handle = fopen($import->tempName, 'r')) !== false) {
-                        while (($row = fgetcsv($handle, 1000, ';')) !== false) {
-                            $subscribers[] = $row;
-                        }
+
+                        $subscribers = \wdmg\helpers\ArrayHelper::importCSV($handle, ';', true);
                         fclose($handle);
 
                         if ($count = $model->import($subscribers, $model->list_id))
@@ -185,8 +182,6 @@ class AllController extends Controller
                                 'danger',
                                 Yii::t('app/modules/subscribers', 'An error occurred while importing subscribers.')
                             );
-
-
                     }
                 }
             }
@@ -200,18 +195,14 @@ class AllController extends Controller
         if (Yii::$app->request->isPost) {
             $model = new SubscribersExport();
             if ($model->load(Yii::$app->request->post()) && $model->validate()) {
-
-                $subscribers = $model->export($model->list_id);
-                if (!is_null($subscribers)) {
-                    $output = 'name;'.'email'."\r\n";
-                    foreach ($subscribers as $subscriber) {
-                        $output .= $subscriber['name'].';'.$subscriber['email']."\r\n";
+                if ($subscribers = $model->export($model->list_id)) {
+                    $filename = 'subscribers_' . date('dmY_His') . '.csv';
+                    if ($output = \wdmg\helpers\ArrayHelper::exportCSV($subscribers, ['name', 'email'], ";", true)) {
+                        Yii::$app->response->sendContentAsFile($output, $filename, [
+                            'mimeType' => 'text/csv',
+                            'inline' => false
+                        ])->send();
                     }
-                    $filename = 'subscribers_'.date('dmY_His').'.csv';
-                    Yii::$app->response->sendContentAsFile($output, $filename, [
-                        'mimeType' => 'text/csv',
-                        'inline' => false
-                    ])->send();
                 }
             }
         }

@@ -55,6 +55,28 @@ $this->params['breadcrumbs'][] = $this->title;
                         return $data->user_id;
                 }
             ],
+            [
+                'attribute' => 'unsubscribe_link',
+                'label' => Yii::t('app/modules/subscribers', 'Link for unsubscribe'),
+                'format' => 'html',
+                'value' => function($data) {
+                    if ($data->unsubscribe_link)
+                        return Html::a($data->unsubscribe_link, $data->unsubscribe_link, ['target' => '_blank']);
+                    else
+                        return null;
+                }
+            ],
+            [
+                'attribute' => 'manage_link',
+                'label' => Yii::t('app/modules/subscribers', 'Manage subscription'),
+                'format' => 'html',
+                'value' => function($data) {
+                    if ($data->manage_link)
+                        return Html::a($data->manage_link, $data->manage_link, ['target' => '_blank']);
+                    else
+                        return null;
+                }
+            ],
 
             [
                 'attribute' => 'unique_token',

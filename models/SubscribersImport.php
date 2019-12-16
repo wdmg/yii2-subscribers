@@ -59,24 +59,20 @@ class SubscribersImport extends Subscribers
     {
         $count = 0;
         if (!is_null($subscribers) && is_array($subscribers)) {
-            $validator = new EmailValidator();
             foreach ($subscribers as $subscriber) {
-                $name = trim($subscriber[0]);
-                $email = trim($subscriber[1]);
-
-                if ($validator->validate($email)) {
-                    $model = new Subscribers();
-                    $model->name = $name;
-                    $model->email = $email;
+                $model = new Subscribers();
+                if ($model->load($subscriber, "") && $model->validate()) {
 
                     if (!is_null($list_id) && !empty($list_id))
                         $model->list_id = intval($list_id);
 
                     if ($model->save())
                         $count++;
+
                 }
             }
         }
+
         return $count;
     }
 

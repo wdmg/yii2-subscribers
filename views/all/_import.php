@@ -24,7 +24,7 @@ use wdmg\widgets\SelectInput;
         'model' => $model,
         'attribute' => 'list_id',
         'items' => \yii\helpers\ArrayHelper::merge([
-            null => Yii::t('app/modules/subscribers', 'Not in listed')
+            false => Yii::t('app/modules/subscribers', 'Not in listed')
         ], $model->getSubscribersList()),
         'options' => [
             'class' => 'form-control'

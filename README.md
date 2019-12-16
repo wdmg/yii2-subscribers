@@ -59,6 +59,6 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [in progress development]
+* v.1.0.3 - Refactoring import/export of subscribers
 * v.1.0.2 - Fixed deprecated class declaration
 * v.1.0.1 - Functionality for import/export of subscribers
-* v.1.0.0 - Added CRUD for models, translations

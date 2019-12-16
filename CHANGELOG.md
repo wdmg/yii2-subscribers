@@ -1,7 +1,11 @@
 Changelog
 =========
 
+## 1.0.3 (2019-12-16)
+ * Refactoring import/export of subscribers
+
 ## 1.0.2 (2019-12-10)
+ * Added unsubscribe and manage subscription links
  * Fixed deprecated class declaration
 
 ## 1.0.1 (2019-12-02)

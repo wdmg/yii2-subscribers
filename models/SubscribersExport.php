@@ -58,7 +58,8 @@ class SubscribersExport extends Subscribers
         } else if (!is_null($list_id)) { // subscribers from current list
             $subscribers = self::find()->select('name, email')->where(['list_id' => intval($list_id)])->asArray()->all();
         }
-        return array_unique($subscribers);
+
+        return array_unique($subscribers, SORT_REGULAR);
     }
 
 }
