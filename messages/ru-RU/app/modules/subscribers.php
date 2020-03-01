@@ -14,8 +14,8 @@ return [
     'User ID' => 'ИД пользователя',
     'Unique token' => 'Уникальный токен',
     'Status' => 'Статус',
-    'Created at' => "Создано",
-    'Updated at' => "Обновлено",
+    'Created' => "Создано",
+    'Updated' => "Обновлено",
     'Created by' => "Автор создания",
     'Updated by' => "Автор изменений",
 
