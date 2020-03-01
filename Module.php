@@ -83,7 +83,7 @@ class Module extends BaseModule
         $items = [
             'label' => $this->name,
             'url' => '#',
-            'icon' => 'fa-address-card',
+            'icon' => 'fa fa-fw fa-address-card',
             'active' => in_array(\Yii::$app->controller->module->id, [$this->id]),
             'items' => [
                 [
