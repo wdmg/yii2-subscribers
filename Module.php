@@ -9,7 +9,7 @@ namespace wdmg\subscribers;
  * @version         1.0.3
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-subscribers
- * @copyright       Copyright (c) 2019 W.D.M.Group, Ukraine
+ * @copyright       Copyright (c) 2019 - 2020 W.D.M.Group, Ukraine
  * @license         https://opensource.org/licenses/MIT Massachusetts Institute of Technology (MIT) License
  *
  */
