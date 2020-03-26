@@ -1,4 +1,4 @@
-[![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.20-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
+[![Yii2](https://img.shields.io/badge/required-Yii2_v2.0.33-blue.svg)](https://packagist.org/packages/yiisoft/yii2)
 [![Github all releases](https://img.shields.io/github/downloads/wdmg/yii2-subscribers/total.svg)](https://GitHub.com/wdmg/yii2-subscribers/releases/)
 ![Progress](https://img.shields.io/badge/progress-in_development-red.svg)
 [![GitHub license](https://img.shields.io/github/license/wdmg/yii2-subscribers.svg)](https://github.com/wdmg/yii2-subscribers/blob/master/LICENSE)
@@ -9,7 +9,7 @@ Subscribers manager for Yii2
 
 # Requirements 
 * PHP 5.6 or higher
-* Yii2 v.2.0.20 and newest
+* Yii2 v.2.0.33 and newest
 * [Yii2 Base](https://github.com/wdmg/yii2-base) module (required)
 * [Yii2 SelectInput](https://github.com/wdmg/yii2-selectinput) widget
 
@@ -59,6 +59,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [in progress development]
+* v.1.0.4 - Up to date dependencies
 * v.1.0.3 - Refactoring import/export of subscribers
 * v.1.0.2 - Fixed deprecated class declaration
 * v.1.0.1 - Functionality for import/export of subscribers

@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.0.4 (2020-03-27)
+ * Up to date dependencies
+ 
 ## 1.0.3 (2019-12-16)
  * Refactoring import/export of subscribers
 
