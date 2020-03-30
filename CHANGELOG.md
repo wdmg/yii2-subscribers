@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.0.5 (2020-03-30)
+ * Log activity
+ 
 ## 1.0.4 (2020-03-27)
  * Up to date dependencies
  
