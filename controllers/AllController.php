@@ -102,18 +102,12 @@ class AllController extends Controller
 
             if ($model->save()) {
                 // Log activity
-                if (
-                    class_exists('\wdmg\activity\models\Activity') &&
-                    $this->module->moduleLoaded('activity') &&
-                    isset(Yii::$app->activity)
-                ) {
-                    Yii::$app->activity->set(
-                        'New subscriber `' . $model->email . '` with ID `' . $model->id . '` has been successfully added.',
-                        $this->uniqueId . ":" . $this->action->id,
-                        'success',
-                        1
-                    );
-                }
+                $this->module->logActivity(
+                    'New subscriber `' . $model->email . '` with ID `' . $model->id . '` has been successfully added.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'success',
+                    1
+                );
 
                 Yii::$app->getSession()->setFlash(
                     'success',
@@ -121,18 +115,12 @@ class AllController extends Controller
                 );
             } else {
                 // Log activity
-                if (
-                    class_exists('\wdmg\activity\models\Activity') &&
-                    $this->module->moduleLoaded('activity') &&
-                    isset(Yii::$app->activity)
-                ) {
-                    Yii::$app->activity->set(
-                        'An error occurred while add the new subscriber: ' . $model->email,
-                        $this->uniqueId . ":" . $this->action->id,
-                        'danger',
-                        1
-                    );
-                }
+                $this->module->logActivity(
+                    'An error occurred while add the new subscriber: ' . $model->email,
+                    $this->uniqueId . ":" . $this->action->id,
+                    'danger',
+                    1
+                );
 
                 Yii::$app->getSession()->setFlash(
                     'danger',
@@ -156,18 +144,12 @@ class AllController extends Controller
 
             if ($model->save()) {
                 // Log activity
-                if (
-                    class_exists('\wdmg\activity\models\Activity') &&
-                    $this->module->moduleLoaded('activity') &&
-                    isset(Yii::$app->activity)
-                ) {
-                    Yii::$app->activity->set(
-                        'Subscriber `' . $model->email . '` with ID `' . $model->id . '` has been successfully updated.',
-                        $this->uniqueId . ":" . $this->action->id,
-                        'success',
-                        1
-                    );
-                }
+                $this->module->logActivity(
+                    'Subscriber `' . $model->email . '` with ID `' . $model->id . '` has been successfully updated.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'success',
+                    1
+                );
 
                 Yii::$app->getSession()->setFlash(
                     'success',
@@ -175,18 +157,12 @@ class AllController extends Controller
                 );
             } else {
                 // Log activity
-                if (
-                    class_exists('\wdmg\activity\models\Activity') &&
-                    $this->module->moduleLoaded('activity') &&
-                    isset(Yii::$app->activity)
-                ) {
-                    Yii::$app->activity->set(
-                        'An error occurred while update the subscriber `' . $model->email . '` with ID `' . $model->id . '`.',
-                        $this->uniqueId . ":" . $this->action->id,
-                        'danger',
-                        1
-                    );
-                }
+                $this->module->logActivity(
+                    'An error occurred while update the subscriber `' . $model->email . '` with ID `' . $model->id . '`.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'danger',
+                    1
+                );
 
                 Yii::$app->getSession()->setFlash(
                     'danger',
@@ -206,18 +182,12 @@ class AllController extends Controller
     {
         if ($this->findModel($id)->delete()) {
             // Log activity
-            if (
-                class_exists('\wdmg\activity\models\Activity') &&
-                $this->module->moduleLoaded('activity') &&
-                isset(Yii::$app->activity)
-            ) {
-                Yii::$app->activity->set(
-                    'Subscriber `' . $model->name . '` with ID `' . $model->id . '` has been successfully deleted.',
-                    $this->uniqueId . ":" . $this->action->id,
-                    'success',
-                    1
-                );
-            }
+            $this->module->logActivity(
+                'Subscriber `' . $model->name . '` with ID `' . $model->id . '` has been successfully deleted.',
+                $this->uniqueId . ":" . $this->action->id,
+                'success',
+                1
+            );
 
             Yii::$app->getSession()->setFlash(
                 'success',
@@ -225,18 +195,12 @@ class AllController extends Controller
             );
         } else {
             // Log activity
-            if (
-                class_exists('\wdmg\activity\models\Activity') &&
-                $this->module->moduleLoaded('activity') &&
-                isset(Yii::$app->activity)
-            ) {
-                Yii::$app->activity->set(
-                    'An error occurred while deleting the subscriber `' . $model->name . '` with ID `' . $model->id . '`.',
-                    $this->uniqueId . ":" . $this->action->id,
-                    'danger',
-                    1
-                );
-            }
+            $this->module->logActivity(
+                'An error occurred while deleting the subscriber `' . $model->name . '` with ID `' . $model->id . '`.',
+                $this->uniqueId . ":" . $this->action->id,
+                'danger',
+                1
+            );
 
             Yii::$app->getSession()->setFlash(
                 'danger',
@@ -261,26 +225,20 @@ class AllController extends Controller
 
                         if ($count = $model->import($subscribers, $model->list_id)) {
                             // Log activity
-                            if (
-                                class_exists('\wdmg\activity\models\Activity') &&
-                                $this->module->moduleLoaded('activity') &&
-                                isset(Yii::$app->activity)
-                            ) {
-                                if (isset($model->list_id)) {
-                                    Yii::$app->activity->set(
-                                        $count . ' subscribers has been successfully imported to list ID `' . $model->list_id . '`.',
-                                        $this->uniqueId . ":" . $this->action->id,
-                                        'success',
-                                        1
-                                    );
-                                } else {
-                                    Yii::$app->activity->set(
-                                        $count . ' subscribers has been successfully imported.',
-                                        $this->uniqueId . ":" . $this->action->id,
-                                        'success',
-                                        1
-                                    );
-                                }
+                            if (isset($model->list_id)) {
+                                $this->module->logActivity(
+                                    $count . ' subscribers has been successfully imported to list ID `' . $model->list_id . '`.',
+                                    $this->uniqueId . ":" . $this->action->id,
+                                    'success',
+                                    1
+                                );
+                            } else {
+                                $this->module->logActivity(
+                                    $count . ' subscribers has been successfully imported.',
+                                    $this->uniqueId . ":" . $this->action->id,
+                                    'success',
+                                    1
+                                );
                             }
 
                             Yii::$app->getSession()->setFlash(
@@ -289,26 +247,20 @@ class AllController extends Controller
                             );
                         } else {
                             // Log activity
-                            if (
-                                class_exists('\wdmg\activity\models\Activity') &&
-                                $this->module->moduleLoaded('activity') &&
-                                isset(Yii::$app->activity)
-                            ) {
-                                if (isset($model->list_id)) {
-                                    Yii::$app->activity->set(
-                                        'An error occurred while importing the subscribers.',
-                                        $this->uniqueId . ":" . $this->action->id,
-                                        'danger',
-                                        1
-                                    );
-                                } else {
-                                    Yii::$app->activity->set(
-                                        'An error occurred while importing the subscribers to list ID `' . $model->list_id . '`.',
-                                        $this->uniqueId . ":" . $this->action->id,
-                                        'danger',
-                                        1
-                                    );
-                                }
+                            if (isset($model->list_id)) {
+                                $this->module->logActivity(
+                                    'An error occurred while importing the subscribers.',
+                                    $this->uniqueId . ":" . $this->action->id,
+                                    'danger',
+                                    1
+                                );
+                            } else {
+                                $this->module->logActivity(
+                                    'An error occurred while importing the subscribers to list ID `' . $model->list_id . '`.',
+                                    $this->uniqueId . ":" . $this->action->id,
+                                    'danger',
+                                    1
+                                );
                             }
 
                             Yii::$app->getSession()->setFlash(
@@ -333,26 +285,20 @@ class AllController extends Controller
                     $filename = 'subscribers_' . date('dmY_His') . '.csv';
                     if ($output = \wdmg\helpers\ArrayHelper::exportCSV($subscribers, ['name', 'email'], ";", true)) {
                         // Log activity
-                        if (
-                            class_exists('\wdmg\activity\models\Activity') &&
-                            $this->module->moduleLoaded('activity') &&
-                            isset(Yii::$app->activity)
-                        ) {
-                            if (isset($model->list_id)) {
-                                Yii::$app->activity->set(
-                                    'Subscribers from list ID `' . $model->list_id . '` has been successfully exported.',
-                                    $this->uniqueId . ":" . $this->action->id,
-                                    'success',
-                                    1
-                                );
-                            } else {
-                                Yii::$app->activity->set(
-                                    'All subscribers has been successfully exported.',
-                                    $this->uniqueId . ":" . $this->action->id,
-                                    'success',
-                                    1
-                                );
-                            }
+                        if (isset($model->list_id)) {
+                            $this->module->logActivity(
+                                'Subscribers from list ID `' . $model->list_id . '` has been successfully exported.',
+                                $this->uniqueId . ":" . $this->action->id,
+                                'success',
+                                1
+                            );
+                        } else {
+                            $this->module->logActivity(
+                                'All subscribers has been successfully exported.',
+                                $this->uniqueId . ":" . $this->action->id,
+                                'success',
+                                1
+                            );
                         }
 
                         Yii::$app->response->sendContentAsFile($output, $filename, [
@@ -363,18 +309,12 @@ class AllController extends Controller
                 }
             } else {
                 // Log activity
-                if (
-                    class_exists('\wdmg\activity\models\Activity') &&
-                    $this->module->moduleLoaded('activity') &&
-                    isset(Yii::$app->activity)
-                ) {
-                    Yii::$app->activity->set(
-                        'An error occurred while export the subscribers.',
-                        $this->uniqueId . ":" . $this->action->id,
-                        'danger',
-                        1
-                    );
-                }
+                $this->module->logActivity(
+                    'An error occurred while export the subscribers.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'danger',
+                    1
+                );
             }
         }
         $this->redirect(['all/index']);
@@ -386,18 +326,12 @@ class AllController extends Controller
             $model = new Subscribers();
             if ($model->deleteAll()) {
                 // Log activity
-                if (
-                    class_exists('\wdmg\activity\models\Activity') &&
-                    $this->module->moduleLoaded('activity') &&
-                    isset(Yii::$app->activity)
-                ) {
-                    Yii::$app->activity->set(
-                        'All subscribers has been successfully deleted.',
-                        $this->uniqueId . ":" . $this->action->id,
-                        'success',
-                        1
-                    );
-                }
+                $this->module->logActivity(
+                    'All subscribers has been successfully deleted.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'success',
+                    1
+                );
 
                 Yii::$app->getSession()->setFlash(
                     'success',
@@ -405,18 +339,13 @@ class AllController extends Controller
                 );
             } else {
                 // Log activity
-                if (
-                    class_exists('\wdmg\activity\models\Activity') &&
-                    $this->module->moduleLoaded('activity') &&
-                    isset(Yii::$app->activity)
-                ) {
-                    Yii::$app->activity->set(
-                        'An error occurred while deleting subscribers.',
-                        $this->uniqueId . ":" . $this->action->id,
-                        'danger',
-                        1
-                    );
-                }
+                $this->module->logActivity(
+                    'An error occurred while deleting subscribers.',
+                    $this->uniqueId . ":" . $this->action->id,
+                    'danger',
+                    1
+                );
+
 
                 Yii::$app->getSession()->setFlash(
                     'danger',
