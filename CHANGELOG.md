@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.0.6 (2020-06-28)
+ * Update dependencies, README.md
+ 
 ## 1.0.5 (2020-03-31)
  * Refactoring log of activity
  * Log activity
