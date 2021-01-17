@@ -6,10 +6,10 @@ namespace wdmg\subscribers;
  * Yii2 Subscribers
  *
  * @category        Module
- * @version         1.0.6
+ * @version         1.0.7
  * @author          Alexsander Vyshnyvetskyy <alex.vyshnyvetskyy@gmail.com>
  * @link            https://github.com/wdmg/yii2-subscribers
- * @copyright       Copyright (c) 2019 - 2020 W.D.M.Group, Ukraine
+ * @copyright       Copyright (c) 2019 - 2021 W.D.M.Group, Ukraine
  * @license         https://opensource.org/licenses/MIT Massachusetts Institute of Technology (MIT) License
  *
  */
@@ -45,7 +45,7 @@ class Module extends BaseModule
     /**
      * @var string the module version
      */
-    private $version = "1.0.6";
+    private $version = "1.0.7";
 
     /**
      * @var string, route to web for manage subscription
@@ -78,7 +78,7 @@ class Module extends BaseModule
     /**
      * {@inheritdoc}
      */
-    public function dashboardNavItems($createLink = false)
+    public function dashboardNavItems($options = false)
     {
         $items = [
             'label' => $this->name,

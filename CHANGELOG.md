@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.0.7 (2021-01-17)
+ * Fixed migrations and extend module dashboardNavItems() method
+ 
 ## 1.0.6 (2020-06-28)
  * Update dependencies, README.md
  

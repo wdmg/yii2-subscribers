@@ -23,9 +23,9 @@ class m191028_021845_subscribers_list extends Migration
             'description' => $this->text(),
             'status' => $this->boolean()->defaultValue(true),
             'created_at' => $this->dateTime()->defaultExpression('CURRENT_TIMESTAMP'),
-            'created_by' => $this->integer(11)->notNull()->defaultValue(0),
+            'created_by' => $this->integer(11)->null(),
             'updated_at' => $this->datetime()->defaultExpression('CURRENT_TIMESTAMP'),
-            'updated_by' => $this->integer(11)->notNull()->defaultValue(0),
+            'updated_by' => $this->integer(11)->null(),
         ], $tableOptions);
 
         $this->createIndex(
