@@ -1,6 +1,9 @@
 Changelog
 =========
 
+## 1.0.*
+ * Added counter stats method
+ 
 ## 1.0.7 (2021-01-17)
  * Fixed migrations and extend module dashboardNavItems() method
  

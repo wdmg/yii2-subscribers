@@ -4,7 +4,6 @@ return [
     'Subscribers' => 'Подписчики',
     'Subscribers manager' => 'Менеджер подписок',
 
-
     'ID' => 'ИД',
     'Title' => 'Заголовок',
     'Description' => 'Описание',
@@ -18,8 +17,6 @@ return [
     'Updated' => "Обновлено",
     'Created by' => "Автор создания",
     'Updated by' => "Автор изменений",
-
-
 
     'All subscribers' => 'Все подписчики',
     'Subscriber list' => 'Список подписчиков',
@@ -74,7 +71,6 @@ return [
     'Subscriber has been successfully deleted!' => 'Подписчик был успешно удалён!',
     'An error occurred while deleting the subscriber.' => 'Произошла ошибка при удалении подписчика.',
 
-
     'Subscribers import' => 'Импорт подписчиков',
     'Import subscribers' => 'Импорт подписчиков',
     'Subscribers export' => 'Экспорт подписчиков',
@@ -86,6 +82,8 @@ return [
     'Export' => 'Экспорт',
     'Close' => 'Закрыть',
     'Not in listed' => 'Не в списке',
+
+    'New subscribers in the last 24 hours' => 'Новых подписчиков за последние сутки',
 
     'Delete all' => 'Удалить всех',
     'All subscribers have been successfully deleted!' => 'Все подписчики были успешно удалены!',
