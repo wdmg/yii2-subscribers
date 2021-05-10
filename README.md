@@ -65,6 +65,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [ready to use]
+* v.1.0.8 - Added counter stats method
 * v.1.0.7 - Fixed migrations and extend module dashboardNavItems() method
 * v.1.0.6 - Update dependencies, README.md
 * v.1.0.5 - Refactoring log of activity

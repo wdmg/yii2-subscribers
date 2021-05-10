@@ -1,7 +1,7 @@
 Changelog
 =========
 
-## 1.0.*
+## 1.0.8 (2021-05-10)
  * Added counter stats method
  
 ## 1.0.7 (2021-01-17)
