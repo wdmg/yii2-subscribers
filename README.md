@@ -11,7 +11,7 @@ Subscribers manager for Yii2.
 
 This module is an integral part of the [Butterfly.СMS](https://butterflycms.com/) content management system, but can also be used as an standalone extension.
 
-Copyrights (c) 2019-2021 [W.D.M.Group, Ukraine](https://wdmg.com.ua/)
+Copyrights (c) 2019-2023 [W.D.M.Group, Ukraine](https://wdmg.com.ua/)
 
 # Requirements 
 * PHP 5.6 or higher
@@ -65,11 +65,7 @@ Use the `Module::dashboardNavItems()` method of the module to generate a navigat
     ?>
 
 # Status and version [ready to use]
+* v.2.0.0 - Some fix, update copyrights
 * v.1.0.8 - Added counter stats method
 * v.1.0.7 - Fixed migrations and extend module dashboardNavItems() method
 * v.1.0.6 - Update dependencies, README.md
-* v.1.0.5 - Refactoring log of activity
-* v.1.0.4 - Up to date dependencies
-* v.1.0.3 - Refactoring import/export of subscribers
-* v.1.0.2 - Fixed deprecated class declaration
-* v.1.0.1 - Functionality for import/export of subscribers
